@@ -21,7 +21,7 @@ mapped.sort(function(a, b){
 	else if (a.value > b.value) {
 		return 1;
 	}
-	else{
+	else{ 
 		return 0;
 	}
 });
