@@ -1,0 +1,198 @@
+Mysql:
+1. Data type:
+a. Numeric
+- int, tinyint, smallint, mediumint, bigint
+-float, double
+-decimal
+b. Date and time
+- Date: yyyy-mm-dd
+-Datetime: yyyy-mm-dd hh:mm:ss
+-Timestamp: kiểu dữ liệu thời gian được biểu diễn dưới dạng 1 số nguyên
+-Time
+-Year
+c. String
+-char
+-varchar
+text 
+2. SQL database 
+a. Create/Drop database: CREATE/DROP DATABASE db_name;
+b. Backup db: 
+BACKUP DATABASE databasename
+TO DISK = 'filepath'
+WITH DIFFERENTIAL; //option: sao lưu gia tăng
+c. Create/drop table
+- syntax:
+CREATE TABLE table_name (
+    column1 datatype,
+    column2 datatype,
+    column3 datatype,
+   ....
+);
+- use another table
+CREATE TABLE new_table_name AS
+    SELECT column1, column2,...
+    FROM existing_table_name
+    WHERE ....;
+- drop table: DROP TABLE table_name;
+- Xóa dữ liệu trong bảng: TRUNCATE TABLE table_name;
+d. Alter table: sửa bảng (add, delete, modify)
+- Add colume
+ALTER TABLE table_name
+ADD column_name datatype;
+- Drop colume
+ALTER TABLE table_name
+DROP COLUMN column_name;
+- alter/modify colume 
+ALTER TABLE table_name
+MODIFY COLUMN column_name datatype; 
+- Sửa tên cột: alter - change
+
+e. Sql constraints (ràng buộc)
+- NOT NULL 
+- UNIQUE: các gtri trong cột khác nhau
+- PRYMARY KEY ( = NOT NULL + UNIQUE) : xác định duy nhất mỗi hàng trong một bảng
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (ID)
+);
+// Đặt tên cho khóa
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CONSTRAINT PK_Person PRIMARY KEY (ID,LastName)
+);
+//Create PK on alter table
+ALTER TABLE Persons
+ADD PRIMARY KEY (ID);
+
+//Drop a Primary key
+ALTER TABLE Persons
+DROP PRIMARY KEY;
+
+- FOREIGN KEY xác đinh duy nhất một hàng/bản ghi trong bảng khác (cột chứa khóa chính của bảng khác)
+CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+);
+
+//On alter table
+ALTER TABLE Orders
+ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+
+//Đặt tên cho khóa ngoại
+Dùng CONSTRAINT fk_name
+
+//Drop a FK
+ALTER TABLE tb_name
+DROP FOREIGN KEY fk_name
+- CHECK: kiểm tra 1 điều kiện cụ thể
+//Add check constraint on create tb
+CREATE TABLE tb_name{
+colume1...,
+colume2...,
+CHECK (condition)}; //condition ex: age>=18
+//Allow naming of check constraint
+...,
+CONSTRAINT check_name CHECK (condition)};
+//ADD check constraint on alter tb
+ALTER TABLE tb_name
+ADD CHECK (condition); //ex: add check (age>=18);
+//Naming on alter tb
+ALTER table tb_name
+ADD CONSTRAINT check_name CHECK (condition);
+//Drop check constraint
+ALTER TABLE tb_name
+DROP CHECK check_name;
+
+- DEFAULT: đặt giá trị mặc định khi không có giá trị được chỉ định
+//On create tb: use on colume, ex: city varchar(255) DEFAULT 'Sandnes'
+//On alter tb
+ALTER TABLE tb_name
+ALTER colume_name SET DEFAULT 'default_value'
+//Drop a Default constraint
+ALTER TABLE tb_name
+ALTER colume_name DROP DEFAULT;
+
+- INDEX: tạo và truy xuất dữ liệu từ CSDL rất nhanh 
+//Cung cấp cơ chế truy xuất dl từ db, sử dụng cấu trúc cây btree, sx tăng dần
+//Create index
+CREATE INDEX index_name ON tb_name(col1, col2,...);
+
+//Create unique index
+CREATE UNIQUE INDEX index_name ON tb_name(col1, col2,...);
+
+//Drop index
+ALTER TABLE tb_name
+DROP INDEX index_name;
+
+f, sql views
+//là một bảng ảo dựa trên tập kết quả của câu lệnh SQL.
+//Create a view 
+CREATE VIEW view_name AS
+SELESCT colume1, colume2,...
+FROM table_name
+WHERE condition;
+
+//Update a view
+CREATE OR REPLACE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+//Drop view
+DROP VIEW view_name;
+
+Thứ tự ưu tiên mệnh đề
+FROM (và JOIN)
+WHERE
+GROUP BY
+HAVING
+SELECT
+DISTINCT
+LIMIT / OFFSET
+
+3 loại liên kết: 
+- 1-n: 1 dòng của bảng bên 1 lk với nhiều dòng của bảng bên nhiều
+//lk giữa khóa chính - khóa ngoại
+//1 danh mục - nhiều sản phẩm
+- n-n: mỗi dòng của bảng này lk với nhiều dòng của bảng kia và ngược lại
+//lk giữa hai khóa ngoại
+//1 sp nằm trong nhiều đơn hàng, mỗi đơn hàng có thể nằm trong nhiều sp 
+- 1-1: 1 dòng cuart bảng này liên kết 1 dòng của bảng kia
+//lk giữa hai khóa chính của hai bảng
+//1 sp - 1 hướng dẫn, hai bảng có cùng khóa chính sanphamId
+
+
+MySQL Table Types & Storage Engines
+MyISAM
+InnoDB
+MERGE
+MEMORY (HEAP)
+ARCHIVE
+CSV
+FEDERATED
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

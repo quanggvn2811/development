@@ -1,0 +1,29 @@
+1. object, class, property, method
+- OOP ( object oriented programing): là kĩ thuật mô hình hóa hệ thống thành nhiều đối tượng.
+- object: là một thực trong thế giới thực, có các thuộc tính trạng thái và hành vi
+//là một thể hiện của class
+- Class: 
+//là một thiết kế hay khuôn mẫu cho các đối tượng cùng kiểu
+//một tập hợp các đối tượng, mô tả các đối tượng có chung các thuộc tính và hành vi
+- method: là một hành vi của đối tượng 
+2.Access modifier: public, protected, private
+- public: truy cập ở bất cứ đâu
+- protectd: có thể truy cập trong cùng class & các class con
+- private: có thể truy cập trong cùng class
+3.abstraction, inheritance, encapsulation, polymorrphic
+-trừu tượng:
+//loại bỏ đi những thông tin/ tính chất cụ thể, giữ lại những tính chất chung.
+//loại bỏ đi những tính chất phức tạp của đối tượng 
+- tính đóng gói:
+//che giấu, ẩn đi chi tiết thực hiện bên trong => cung cấp cho người dùng giao diện
+//lợi ích: người dùng không phụ thuộc vào sự thực thi bên trong
+- tính thừa kế: 
+//là khả năng xây dựng 1 class mới dựa trên 1 class đã có
+-tính đa hình:
+// là có nhiều khuôn mẫu
+// một hành động có thể thực hiện theo nhiều cách khác nhau
+3. Static keyword
+-Dùng quản lý vùng nhớ, lưu thông tin cho tất cả object trong class
+- phụ thuộc class, k cần phụ thuộc object
+- gọi phương thức/ biến static thông qua tên class
+
